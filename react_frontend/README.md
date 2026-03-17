@@ -1,82 +1,82 @@
-# Lightweight React Template for KAVIA
+# React Frontend (Simple Todo Application)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+This folder contains the React frontend for the simple todo application workspace. At the moment, the implementation is a Create React App-based starter UI that includes a light/dark theme toggle and basic responsive styling.
 
-## Features
+Although the overall product requirements mention todo CRUD, filtering, and local persistence, those features are not currently implemented in the code under `src/`. This README documents what exists today and how to run it.
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+## Features implemented
 
-## Getting Started
+The current frontend includes:
 
-In the project directory, you can run:
+- A **light/dark theme toggle** implemented in `src/App.js` using React Hooks (`useState`, `useEffect`)
+- Theme styling via CSS variables in `src/App.css` using the `data-theme="dark"` attribute
+- A responsive adjustment for the theme toggle button on smaller screens
 
-### `npm start`
+## Local persistence
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The current code does not persist application state (for example, via `localStorage`). If local persistence is added in the future, it should be described here along with any keys used and migration considerations.
 
-### `npm test`
+## Getting started
 
-Launches the test runner in interactive watch mode.
+### Install dependencies
 
-### `npm run build`
+From this directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+```bash
+npm install
 ```
 
-### Components
+### Start the development server
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+```bash
+npm start
+```
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+By default the app runs on port 3000.
 
-## Learn More
+### Run tests
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create React App runs tests in watch mode by default. In CI/non-interactive environments you can use:
 
-### Code Splitting
+```bash
+CI=true npm test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Build for production
 
-### Analyzing the Bundle Size
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Configuration (environment variables)
 
-### Making a Progressive Web App
+Create React App exposes only environment variables prefixed with `REACT_APP_`. This repository includes a `.env` file with variables that are commonly used when a frontend talks to a backend, but the current frontend code does not reference them.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The `.env` file contains:
 
-### Advanced Configuration
+- `REACT_APP_API_BASE`: Base URL for API requests.
+- `REACT_APP_BACKEND_URL`: Backend base URL (often the same as `REACT_APP_API_BASE`).
+- `REACT_APP_FRONTEND_URL`: Public URL for the frontend.
+- `REACT_APP_WS_URL`: WebSocket URL (for realtime features).
+- `REACT_APP_NODE_ENV`: Environment hint (for example `development`).
+- `REACT_APP_NEXT_TELEMETRY_DISABLED`: Present for environments that also run Next.js tooling; not used by Create React App.
+- `REACT_APP_ENABLE_SOURCE_MAPS`: Controls source map output if respected by the build environment.
+- `REACT_APP_PORT`: Intended port value (the actual dev-server port is typically controlled via `PORT`).
+- `REACT_APP_TRUST_PROXY`: Proxy hint, typically relevant to servers rather than a static frontend.
+- `REACT_APP_LOG_LEVEL`: Log verbosity hint.
+- `REACT_APP_HEALTHCHECK_PATH`: Health check path hint (usually relevant for servers).
+- `REACT_APP_FEATURE_FLAGS`: Feature flags as a JSON-like string.
+- `REACT_APP_EXPERIMENTS_ENABLED`: Enables/disables experiments.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If you add API calls later, prefer reading a single base URL (for example `REACT_APP_API_BASE`) and build request URLs from it.
 
-### Deployment
+## Project structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `public/`: Static assets and the HTML template
+- `src/index.js`: React entry point that renders `<App />`
+- `src/App.js`: Main UI component (currently theme toggle starter)
+- `src/App.css`: Theme variables and styling
 
-### `npm run build` fails to minify
+## Notes for KAVIA preview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+In the KAVIA environment, the React frontend container is typically previewed on port 3000.
